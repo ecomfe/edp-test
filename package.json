@@ -1,0 +1,28 @@
+{
+  "name": "edp-test",
+  "description": "test plugin for edp.",
+  "version": "0.1.0",
+  "contributors": [
+    {
+      "name": "chris",
+      "email": "wfsr@foxmail.com"
+    }
+  ],
+  "dependencies": {
+    "karma": "git+https://github.com/karma-runner/karma.git",
+    "karma-less-preprocessor": "~0.1.7",
+    "karma-stylus-preprocessor": "~0.0.1"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ecomfe/edp-test"
+  },
+  "readme": "# edp-test\n\ntest command for edp.\n\n\n\n\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/ecomfe/edp-test/issues"
+  },
+  "_id": "edp-test@0.1.0",
+  "_from": "edp-test@>=0.1.0"
+}
