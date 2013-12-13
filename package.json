@@ -1,6 +1,6 @@
 {
   "name": "edp-test",
-  "description": "test plugin for edp.",
+  "description": "Package for edp test.",
   "version": "0.1.0",
   "contributors": [
     {
