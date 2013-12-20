@@ -24,8 +24,8 @@ exports.start = function (args) {
         process.argv.splice(2, 1, cmd);
     }
 
-    var testDir = 'test/';
-    var testConfig = testDir + 'config.js';
+    var testDir = path.resolve(process.cwd(), 'test/');
+    var testConfig = path.resolve(testDir, 'config.js');
 
     // 保证有 test 目录
     if (!fs.existsSync(testDir)) {
@@ -78,9 +78,13 @@ exports.start = function (args) {
             init.run();
         }
 
-        // 指定配置文件路径
-        process.argv[3] = testConfig;
-        cli.run();
+        init.install(testConfig, function () {
+            // 指定配置文件路径
+            process.argv[3] = testConfig;
+            cli.run();
+
+        });
+
     }
     
 };
