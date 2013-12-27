@@ -77,6 +77,9 @@ exports.start = function (args) {
             console.log('未发现测试配置文件，自动创建...');
             init.run();
         }
+        else {
+            init.linkKarmaJs();
+        }
 
         init.install(testConfig, function () {
             // 指定配置文件路径
