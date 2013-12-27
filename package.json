@@ -1,7 +1,7 @@
 {
   "name": "edp-test",
   "description": "Package for edp test.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "contributors": [
     {
       "name": "chris",
@@ -23,6 +23,6 @@
   "bugs": {
     "url": "https://github.com/ecomfe/edp-test/issues"
   },
-  "_id": "edp-test@0.1.2",
-  "_from": "edp-test@>=0.1.2"
+  "_id": "edp-test@0.1.3",
+  "_from": "edp-test@>=0.1.3"
 }
