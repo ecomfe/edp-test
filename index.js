@@ -64,9 +64,7 @@ exports.start = function (args) {
         });
 
         rl.on('line', function (line) {
-            if (line.toLowerCase() === 'yes') {
-                init.run();
-            }
+            init.run(line.toLowerCase() === 'yes');
             rl.close();
         });
         
