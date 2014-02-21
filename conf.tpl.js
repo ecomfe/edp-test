@@ -14,11 +14,11 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'src/css/*.less',
-      'src/css/*.styl',
-      'src/css/*.css',
-      {pattern: 'src/*/*.js', included: false},
-      {pattern: 'test/*/*Spec.js', included: false},
+      'src/**/*.less',
+      'src/**/*.styl',
+      'src/**/*.css',
+      {pattern: 'src/**/*.js', included: false},
+      {pattern: 'test/**/*Spec.js', included: false},
       'test/main.js'
     ],
 
@@ -37,9 +37,9 @@ module.exports = function(config) {
       // source files, that you wanna generate coverage for
       // do not include tests or libraries
       // (these files will be instrumented by Istanbul)
-      'src/*/*.js': ['coverage'],
-      'src/css/*.less': ['less'],
-      'src/css/*.styl': ['stylus']
+      'src/**/*.js': ['coverage'],
+      'src/**/*.less': ['less'],
+      'src/**/*.styl': ['stylus']
     },
 
     // optionally, configure the reporter
@@ -47,7 +47,7 @@ module.exports = function(config) {
       // text-summary | text | html | json | teamcity | cobertura | lcov
       // lcovonly | none | teamcity
       type : 'text',
-      dir : 'coverage/'
+      dir : 'test/coverage/'
     },
 
     // web server port
@@ -75,7 +75,7 @@ module.exports = function(config) {
     // - Safari (only Mac; has to be installed with `npm install karma-safari-launcher`)
     // - PhantomJS
     // - IE (only Windows; has to be installed with `npm install karma-ie-launcher`)
-    browsers: ['Chrome'/*, 'Firefox', 'Safari', "PhantomJS"*/],
+    browsers: [/*'Chrome', 'Firefox', 'Safari', */"PhantomJS"],
 
 
     // If browser does not capture in given timeout [ms], kill it
