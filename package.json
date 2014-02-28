@@ -9,7 +9,7 @@
     }
   ],
   "dependencies": {
-    "karma": "canary",
+    "karma": "~0.11.14",
     "karma-less-preprocessor": "~0.1.7",
     "karma-stylus-preprocessor": "~0.0.1"
   },
