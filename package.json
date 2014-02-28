@@ -1,7 +1,7 @@
 {
   "name": "edp-test",
   "description": "Package for edp test.",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "contributors": [
     {
       "name": "chris",
@@ -9,7 +9,7 @@
     }
   ],
   "dependencies": {
-    "karma": "karma@canary",
+    "karma": "canary",
     "karma-less-preprocessor": "~0.1.7",
     "karma-stylus-preprocessor": "~0.0.1"
   },
