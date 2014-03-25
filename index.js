@@ -29,7 +29,7 @@ exports.start = function (args) {
 
     // 保证有 test 目录
     if (!fs.existsSync(testDir)) {
-        fs.mkdir(testDir)
+        fs.mkdir(testDir);
     }
 
 
@@ -50,7 +50,7 @@ exports.start = function (args) {
         });
 
         rl.write('已经存在测试配置文件，确定要覆盖? (yes or no)\n');
-        rl.prompt()
+        rl.prompt();
         rl.write('yes');
         var isYes = true;
         process.stdin.on('keypress', function(s, key) {
