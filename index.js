@@ -2,27 +2,18 @@
  * @file 测试模块
  * @author chris[wfsr@foxmail.com]
  */
-var karma = require('karma');
-var path = require('path');
 var fs = require('fs');
+var path = require('path');
 
-var dir = path.resolve(__dirname, 'node_modules', 'karma', 'lib');
+var edp = require('edp-core');
 
-
-exports.config = require('./lib/config');
-
-exports.start = function (args) {
-
-    // remove 'node' in argv
-    process.argv.shift();
-    // simulate 'karma xxx'
-    process.argv[1] = 'karma';
-
-    var cmd = args[0];
-    if (!/^(init|start|run|completion)$/i.test(cmd)) {
-        cmd = 'start';
-        process.argv.splice(2, 1, cmd);
-    }
+/**
+ * 检查配置文件
+ * 
+ * @param {boolean} force 是否强制覆盖配置文件
+ */
+function check(force) {
+    process.chdir(edp.path.getRootDirectory());
 
     var testDir = path.resolve(process.cwd(), 'test/');
     var testConfig = path.resolve(testDir, 'config.js');
@@ -32,61 +23,65 @@ exports.start = function (args) {
         fs.mkdir(testDir)
     }
 
-
-    var cli = require(path.join(dir, 'cli'));
     var init = require('./lib/init');
 
-    if (cmd === 'init') {
-
-        if (!fs.existsSync(testConfig)) {
-            init.run();
-            return;
-        }
-
-        var readline = require('readline');
-        var rl = readline.createInterface({
-            input: process.stdin,
-            output: process.stdout
-        });
-
-        rl.write('已经存在测试配置文件，确定要覆盖? (yes or no)\n');
-        rl.prompt()
-        rl.write('yes');
-        var isYes = true;
-        process.stdin.on('keypress', function(s, key) {
-            if (key.name === 'tab') {
-                rl._deleteLineLeft();
-                rl._deleteLineRight();
-                rl.write(isYes ? 'no' : 'yes');
-                rl.prompt();
-                isYes = !isYes;
-            }
-        });
-
-        rl.on('line', function (line) {
-            init.run(line.toLowerCase() === 'yes');
-            rl.close();
-        });
-        
+    // 不存在目标文件或指定强制覆盖时
+    if (!fs.existsSync(testConfig) || force) {
+        init.run();
     }
-    else {
-        // 不存在配置文件时自动创建
-        if (!fs.existsSync(testConfig)) {
-            console.log('未发现测试配置文件，自动创建...');
-            init.run();
-        }
-        else {
-            init.linkKarmaJs();
-        }
+}
 
-        init.install(testConfig, function () {
-            // 指定配置文件路径
-            process.argv[3] = testConfig;
-            cli.run();
+/**
+ * 初始化配置
+ * 
+ * @param {Object} opts 命令选项
+ */
+exports.init = function (opts) {
+    var force = 'force' in opts;
+    check(force);
 
-        });
-
+    if (force) {
+        return;
     }
+
+    var init = require('./lib/init');
+
+    var readline = require('readline');
+    var rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+
+    rl.write('已经存在测试配置文件，确定要覆盖? (yes or No)\n');
+    rl.prompt()
+    rl.write('no');
+    var isYes = false;
+    process.stdin.on('keypress', function(s, key) {
+        if (~'up,down,tab'.indexOf(key.name)) {
+            rl._deleteLineLeft();
+            rl._deleteLineRight();
+            rl.write(isYes ? 'no' : 'yes');
+            rl.prompt();
+            isYes = !isYes;
+        }
+    });
+
+    rl.on('line', function (line) {
+        init.run(line.toLowerCase() === 'yes');
+        rl.close();
+    });
+};
+
+/**
+ * 运行测试服务
+ * 
+ * @param {Object} opts 命令选项
+ */
+exports.start = function (opts) {
+
+    check(true);
+
+    require('./lib/start').run(opts);
     
 };
 
