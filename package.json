@@ -1,7 +1,7 @@
 {
   "name": "edp-test",
   "description": "Package for edp test.",
-  "version": "0.1.9",
+  "version": "1.0.0",
   "contributors": [
     {
       "name": "chris",
@@ -28,6 +28,9 @@
   },
   "readme": "# edp-test\n\ntest command for edp.\n\n\n\n\n",
   "readmeFilename": "README.md",
+  "scripts": {
+    "test": "make -C test"
+  },
   "bugs": {
     "url": "https://github.com/ecomfe/edp-test/issues"
   }
