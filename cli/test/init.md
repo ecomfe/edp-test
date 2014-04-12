@@ -4,8 +4,11 @@ init
 ### Usage
 
     edp test init
-    edp test init --force
-    edp test init -f
+    edp test init [--force]
+
+### Options
+
++ --force - 如果存在配置文件，强制覆盖。
 
 ### Description
 
