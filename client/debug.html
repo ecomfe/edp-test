@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>edp test runner - using jasmine</title>
+<!--%css%-->
+<link rel="stylesheet" href=".edp-test/jasmine/1.3.1/jasmine.css">
+<script src=".edp-test/jasmine/1.3.1/jasmine.js"></script>
+<script src=".edp-test/jasmine/1.3.1/jasmine-html.js"></script>
+<script src=".edp-test/esl.js"></script>
+<script>
+require.config({
+    baseUrl: './src',
+    urlArgs: 'v=' + (+new Date()).toString(36),
+    paths: {
+        test: '../test'
+    }
+});
+</script>
+</head>
+<body>
+<script>
+(function () {
+
+    require([ /*specs*/ ], function () {
+
+        var jasmineEnv = jasmine.getEnv();
+        jasmineEnv.updateInterval = 1000;
+        var htmlReporter = new jasmine.HtmlReporter();
+        jasmineEnv.addReporter(htmlReporter);
+
+        jasmineEnv.specFilter = function(spec) {
+          return htmlReporter.specFilter(spec);
+        };
+        jasmineEnv.execute();
+
+    });
+
+})();
+</script>
+</body>
+</html>
