@@ -8,11 +8,11 @@ var path = require('path');
 var edp = require('edp-core');
 
 /**
- * 检查配置文件
+ * 检查配置文件是否存在
  * 
- * @param {boolean} force 是否强制覆盖配置文件
+ * @return {boolean}
  */
-function check(force) {
+function check() {
     process.chdir(edp.path.getRootDirectory());
 
     var testDir = path.resolve(process.cwd(), 'test/');
@@ -25,10 +25,7 @@ function check(force) {
 
     var init = require('./lib/init');
 
-    // 不存在目标文件或指定强制覆盖时
-    if (!fs.existsSync(testConfig) || force) {
-        init.run();
-    }
+    return fs.existsSync(testConfig);
 }
 
 /**
@@ -37,14 +34,13 @@ function check(force) {
  * @param {Object} opts 命令选项
  */
 exports.init = function (opts) {
+    var init = require('./lib/init');
     var force = 'force' in opts;
-    check(force);
 
-    if (force) {
+    if (!check() || force) {
+        init.run();
         return;
     }
-
-    var init = require('./lib/init');
 
     var readline = require('readline');
     var rl = readline.createInterface({
@@ -79,7 +75,9 @@ exports.init = function (opts) {
  */
 exports.start = function (opts) {
 
-    check(true);
+    if (!check()) {
+        require('./lib/init').run();
+    }
 
     require('./lib/start').run(opts);
     
