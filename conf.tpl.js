@@ -1,25 +1,18 @@
-// Test configuration for Karma 
+// Test configuration for edp-test 
 // Generated on %DATE%
-
-module.exports = function(config) {
-  config.set({
+module.exports = {
 
     // base path, that will be used to resolve files and exclude
     basePath: '../',
 
 
     // frameworks to use
-    frameworks: ['jasmine', 'requirejs'],
+    frameworks: ['jasmine', 'esl'],
 
 
     // list of files / patterns to load in the browser
     files: [
-      'src/**/*.less',
-      'src/**/*.styl',
-      'src/**/*.css',
-      {pattern: 'src/**/*.js', included: false},
-      {pattern: 'test/**/*Spec.js', included: false},
-      'test/main.js'
+        'test/**/*Spec.js'
     ],
 
 
@@ -29,42 +22,20 @@ module.exports = function(config) {
     ],
 
 
-    // test results reporter to use
-    // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-    reporters: ['progress', 'coverage'],
-
-    preprocessors: {
-      // source files, that you wanna generate coverage for
-      // do not include tests or libraries
-      // (these files will be instrumented by Istanbul)
-      'src/**/*.js': ['coverage'],
-      'src/**/*.less': ['less'],
-      'src/**/*.styl': ['stylus']
-    },
-
     // optionally, configure the reporter
     coverageReporter: {
-      // text-summary | text | html | json | teamcity | cobertura | lcov
-      // lcovonly | none | teamcity
-      type : 'text',
-      dir : 'test/coverage/'
+        // text-summary | text | html | json | teamcity | cobertura | lcov
+        // lcovonly | none | teamcity
+        type : 'text|html',
+        dir : 'test/coverage/'
     },
 
     // web server port
-    port: 9876,
-
-
-    // enable / disable colors in the output (reporters and logs)
-    colors: true,
-
-
-    // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    port: 8120,
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
+    watch: true,
 
 
     // Start these browsers, currently available:
@@ -75,19 +46,10 @@ module.exports = function(config) {
     // - Safari (only Mac; has to be installed with `npm install karma-safari-launcher`)
     // - PhantomJS
     // - IE (only Windows; has to be installed with `npm install karma-ie-launcher`)
-    browsers: [/*'Chrome', 'Firefox', 'Safari', */"PhantomJS"],
-
-
-    // If browser does not capture in given timeout [ms], kill it
-    captureTimeout: 60000,
+    browsers: [/*'Chrome', 'Firefox', 'Safari', */'PhantomJS'],
 
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: true,
-
-    plugins: [
-        'karma-jasmine', 'karma-chrome-launcher', "karma-less-preprocessor", "karma-stylus-preprocessor", 'karma-requirejs', 'karma-coverage'
-    ]
-  });
+    singleRun: true
 };

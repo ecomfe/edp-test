@@ -1,7 +1,7 @@
 {
   "name": "edp-test",
   "description": "Package for edp test.",
-  "version": "0.1.11",
+  "version": "1.0.0",
   "contributors": [
     {
       "name": "chris",
@@ -9,9 +9,17 @@
     }
   ],
   "dependencies": {
-    "karma": "~0.11.14",
-    "karma-less-preprocessor": "~0.2.0",
-    "karma-stylus-preprocessor": "~0.0.1"
+    "edp-core": "*",
+    "edp-config": "*",
+    "edp-project": "*",
+    "edp-webserver": "*",
+    "socket.io": "~0.9.13",
+    "socket.io-client": "~0.9.16",
+    "browser-launcher": "~0.3.4",
+    "istanbul": "~0.2.4",
+    "qransi": "0.0.2",
+    "chokidar": "~0.8.2",
+    "useragent": "~2.0.8"
   },
   "main": "index.js",
   "repository": {
@@ -20,6 +28,9 @@
   },
   "readme": "# edp-test\n\ntest command for edp.\n\n\n\n\n",
   "readmeFilename": "README.md",
+  "scripts": {
+    "test": "make -C test"
+  },
   "bugs": {
     "url": "https://github.com/ecomfe/edp-test/issues"
   }
