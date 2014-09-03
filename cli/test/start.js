@@ -38,11 +38,11 @@ cli.description = '运行 edp-test 服务';
 
 /**
  * 模块命令行运行入口
- * 
+ *
  * @param {Array} args 命令运行参数
  * @param {Object} opts 命令选项
  */
-cli.main = function ( args, opts ) {
+cli.main = function (args, opts) {
     require('../../index').start(opts);
 };
 

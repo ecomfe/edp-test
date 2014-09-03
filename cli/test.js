@@ -20,10 +20,10 @@ cli.description = '对当前项目运行单元测试';
 
 /**
  * 模块命令行运行入口
- * 
+ *
 */
 cli.main = function () {
-    var log = require( 'edp-core' ).log;
+    var log = require('edp-core').log;
     log.info('See `edp test --help`');
 };
 

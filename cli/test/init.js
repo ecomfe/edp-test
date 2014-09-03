@@ -36,7 +36,7 @@ cli.description = '初始化 edp-test，创建配置文件';
 
 /**
  * 模块命令行运行入口
- * 
+ *
  * @param {Array} args 命令运行参数
  * @param {Object} opts 命令选项
  */
