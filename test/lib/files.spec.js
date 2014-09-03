@@ -4,7 +4,6 @@
  **/
 
 var fs = require('fs');
-var path = require('path');
 var files = require('../../lib/files');
 
 function rmdir(path) {
@@ -50,34 +49,34 @@ describe('文件匹配', function () {
 
     it('无匹配', function () {
         var resolveFiles = files.readAll(['.tmp/**/*.foo']);
-        expect(resolveFiles.css.length).toBe(0);  
-        expect(resolveFiles.js.length).toBe(0);  
+        expect(resolveFiles.css.length).toBe(0);
+        expect(resolveFiles.js.length).toBe(0);
     });
 
     it('匹配 css', function () {
         var resolveFiles = files.readAll(['.tmp/**/*.css']);
-        expect(resolveFiles.css.length).toBe(5);  
+        expect(resolveFiles.css.length).toBe(5);
     });
 
     it('匹配 js', function () {
         var resolveFiles = files.readAll(['.tmp/**/*.js']);
-        expect(resolveFiles.js.length).toBe(10);  
+        expect(resolveFiles.js.length).toBe(10);
     });
 
     it('匹配并排除 css', function () {
         var resolveFiles = files.readAll(['.tmp/**/*.css'], ['.tmp/**/{2,3,4}.css']);
-        expect(resolveFiles.css.length).toBe(2);  
+        expect(resolveFiles.css.length).toBe(2);
     });
 
     it('匹配并排除 js', function () {
         var resolveFiles = files.readAll(['.tmp/**/*.js'], ['.tmp/**/{8,9}.js']);
-        expect(resolveFiles.js.length).toBe(8);  
+        expect(resolveFiles.js.length).toBe(8);
     });
 
     it('全部匹配', function () {
         var resolveFiles = files.readAll(['.tmp/**/*.*']);
-        expect(resolveFiles.js.length).toBe(10);  
-        expect(resolveFiles.css.length).toBe(5);  
+        expect(resolveFiles.js.length).toBe(10);
+        expect(resolveFiles.css.length).toBe(5);
     });
 
     it('合并匹配排除', function () {
@@ -85,7 +84,7 @@ describe('文件匹配', function () {
             ['.tmp/**/*.js', '.tmp/**/*.css'],
             ['.tmp/**/{6,3,2,5}.js', '.tmp/**/{2,3}.css']
         );
-        expect(resolveFiles.js.length).toBe(6);  
-        expect(resolveFiles.css.length).toBe(3);  
+        expect(resolveFiles.js.length).toBe(6);
+        expect(resolveFiles.css.length).toBe(3);
     });
 });

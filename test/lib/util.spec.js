@@ -3,10 +3,6 @@
  * @author chris[wfsr@foxmail.com]
  **/
 
-var fs = require('fs');
-var path = require('path');
-
-
 describe('工具函数', function () {
 
     it('getIP', function () {
@@ -17,14 +13,14 @@ describe('工具函数', function () {
         if (ip !== defultAddress) {
             var ifaces = require('os').networkInterfaces();
             var found = false;
+            var find = function (details) {
+                if (ip === details.address && details.family === 'IPv4') {
+                    found = true;
+                }
+            };
+
             for (var dev in ifaces) {
-                ifaces[dev].forEach(
-                    function(details) {
-                        if (ip === details.address && details.family === 'IPv4') {
-                            found = true;
-                        }
-                    }
-                );
+                ifaces[dev].forEach(find);
             }
             expect(found).toBe(true);
         }
@@ -41,7 +37,7 @@ describe('工具函数', function () {
         // 先占用
         var server = require('http').createServer();
         server.listen(config.port);
-        
+
         util.getPort(config, function (err, config) {
             expect(err).toBeNull();
             expect(config.port).not.toBe(port);
@@ -49,8 +45,8 @@ describe('工具函数', function () {
             // 可能会一直向上加 1 直至找到可用的端口
             expect(config.port).toBe(port + 1);
             done();
-        })        
-        
+        });
+
     });
 
 });
