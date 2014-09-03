@@ -9,7 +9,7 @@ var edp = require('edp-core');
 
 /**
  * 检查配置文件是否存在
- * 
+ *
  * @return {boolean}
  */
 function check() {
@@ -20,17 +20,15 @@ function check() {
 
     // 保证有 test 目录
     if (!fs.existsSync(testDir)) {
-        fs.mkdir(testDir)
+        fs.mkdir(testDir);
     }
-
-    var init = require('./lib/init');
 
     return fs.existsSync(testConfig);
 }
 
 /**
  * 初始化配置
- * 
+ *
  * @param {Object} opts 命令选项
  */
 exports.init = function (opts) {
@@ -49,7 +47,7 @@ exports.init = function (opts) {
     });
 
     rl.write('已经存在测试配置文件，确定要覆盖? (yes or No)\n');
-    rl.prompt()
+    rl.prompt();
     rl.write('no');
     var isYes = false;
     process.stdin.on('keypress', function(s, key) {
@@ -70,7 +68,7 @@ exports.init = function (opts) {
 
 /**
  * 运行测试服务
- * 
+ *
  * @param {Object} opts 命令选项
  */
 exports.start = function (opts) {
@@ -80,6 +78,6 @@ exports.start = function (opts) {
     }
 
     require('./lib/start').run(opts);
-    
+
 };
 
