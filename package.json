@@ -9,16 +9,16 @@
     }
   ],
   "dependencies": {
-    "edp-core": "*",
+    "chokidar": "~0.8.2",
+    "edp-browser-launcher2": "^0.4.2",
     "edp-config": "*",
+    "edp-core": "*",
     "edp-project": "*",
     "edp-webserver": "*",
-    "socket.io": "~0.9.13",
-    "socket.io-client": "~0.9.16",
-    "browser-launcher": "~0.3.4",
     "istanbul": "~0.2.4",
     "qransi": "0.0.2",
-    "chokidar": "~0.8.2",
+    "socket.io": "~0.9.13",
+    "socket.io-client": "~0.9.16",
     "useragent": "~2.0.8"
   },
   "main": "index.js",
