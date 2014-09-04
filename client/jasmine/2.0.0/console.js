@@ -3,10 +3,10 @@
 
         var stack = step.stack;
         var message = step.message;
-        if(stack) {
+        if (stack) {
             // remove the trailing dot
             var firstLine = stack.substring(0, stack.indexOf('\n') - 1);
-            if(message && message.indexOf(firstLine) === -1) {
+            if (message && message.indexOf(firstLine) === -1) {
                 stack = message + '\n' + stack;
             }
 
@@ -80,14 +80,14 @@
 
             var topResults = this.topResults;
             var currentParent = this.currentParent;
-            while(currentParent && currentParent !== topResults) {
+            while (currentParent && currentParent !== topResults) {
                 result.suite.unshift(currentParent.result.description);
                 currentParent = currentParent.parent;
             }
 
-            if(spec.status === 'failed') {
+            if (spec.status === 'failed') {
                 var steps = spec.failedExpectations;
-                for(var i = 0; i < steps.length; i++) {
+                for (var i = 0; i < steps.length; i++) {
                     result.log.push(formatFailedStep(steps[i]));
                 }
             }

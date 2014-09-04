@@ -3,10 +3,10 @@
 
         var stack = step.trace.stack;
         var message = step.message;
-        if(stack) {
+        if (stack) {
             // remove the trailing dot
             var firstLine = stack.substring(0, stack.indexOf('\n') - 1);
-            if(message && message.indexOf(firstLine) === -1) {
+            if (message && message.indexOf(firstLine) === -1) {
                 stack = message + '\n' + stack;
             }
 
@@ -15,20 +15,6 @@
         }
 
         return message;
-    };
-
-    var indexOf = function(collection, item) {
-        if(collection.indexOf) {
-            return collection.indexOf(item);
-        }
-
-        for(var i = 0, ii = collection.length; i < ii; i++) {
-            if(collection[i] === item) {
-                return i;
-            }
-        }
-
-        return -1;
     };
 
     /**
@@ -77,15 +63,15 @@
             };
 
             var suitePointer = spec.suite;
-            while(suitePointer) {
+            while (suitePointer) {
                 result.suite.unshift(suitePointer.description);
                 suitePointer = suitePointer.parentSuite;
             }
 
-            if(!result.success) {
+            if (!result.success) {
                 var steps = spec.results_.items_;
-                for(var i = 0; i < steps.length; i++) {
-                    if(!steps[i].passed_) {
+                for (var i = 0; i < steps.length; i++) {
+                    if (!steps[i].passed_) {
                         result.log.push(formatFailedStep(steps[i]));
                     }
                 }
