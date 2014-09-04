@@ -17,12 +17,20 @@ require.config(/*requireConfig*/);
 
         var jasmineEnv = jasmine.getEnv();
         jasmineEnv.updateInterval = 1000;
-        var htmlReporter = new jasmine.HtmlReporter();
+        var htmlReporter = jasmine.htmlReporter || new jasmine.HtmlReporter();
         jasmineEnv.addReporter(htmlReporter);
 
-        jasmineEnv.specFilter = function(spec) {
-          return htmlReporter.specFilter(spec);
-        };
+        // for jasmine2
+        if (jasmine.htmlReporter) {
+            htmlReporter.initialize();
+        }
+        // jasmine1.3.1
+        else {
+            jasmineEnv.specFilter = function(spec) {
+              return htmlReporter.specFilter(spec);
+            };
+        }
+
         jasmineEnv.execute();
 
     });
