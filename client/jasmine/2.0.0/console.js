@@ -70,13 +70,14 @@
         },
 
         specDone: function(spec) {
+            var status = spec.status;
 
             var result = {
                 id: parseInt(spec.id.slice(4), 10),
                 description: spec.description,
                 suite: [],
-                success: spec.status === 'passed',
-                skipped: spec.status === 'pending',
+                success: status === 'passed',
+                skipped: status === 'pending' || status === 'disabled' ,
                 log: [],
                 total: this.total
             };
@@ -88,7 +89,7 @@
                 currentParent = currentParent.parent;
             }
 
-            if (spec.status === 'failed') {
+            if (status === 'failed') {
                 var steps = spec.failedExpectations;
                 for (var i = 0; i < steps.length; i++) {
                     result.log.push(formatFailedStep(steps[i]));
