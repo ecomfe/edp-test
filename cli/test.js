@@ -1,6 +1,6 @@
 /**
  * @file edp 测试模块
- * @author chris[wfsr@foxmail.com]
+ * @author chris<wfsr@foxmail.com>
  **/
 
 /**

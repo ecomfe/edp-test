@@ -1,6 +1,6 @@
 /**
  * @file 初始化配置
- * @author chris[wfsr@foxmail.com]
+ * @author chris<wfsr@foxmail.com>
  **/
 
 /**

@@ -1,6 +1,6 @@
 /**
  * @file 运行测试服务
- * @author chris[wfsr@foxmail.com]
+ * @author chris<wfsr@foxmail.com>
  **/
 
 /**
