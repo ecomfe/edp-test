@@ -11,7 +11,10 @@
             }
 
             // remove jasmine stack entries
-            return stack.replace(/\n.+jasmine\.js\w*\:.+(?=(\n|$))/g, '');
+            return stack
+                .replace(/\?[^:]+/, '')
+                .replace(/\n.+\/.edp-test\/.+\.js:.+(?=(\n|$))/g, '')
+                .replace(/\n.+\/(context\.html)?\:.+(?=(\n|$))/g, '');
         }
 
         return message;
