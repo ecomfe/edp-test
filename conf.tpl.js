@@ -1,4 +1,4 @@
-// Test configuration for edp-test 
+// Test configuration for edp-test
 // Generated on %DATE%
 module.exports = {
 
@@ -18,9 +18,8 @@ module.exports = {
 
     // list of files to exclude
     exclude: [
-      
-    ],
 
+    ],
 
     // optionally, configure the reporter
     coverageReporter: {
@@ -40,13 +39,17 @@ module.exports = {
 
     // Start these browsers, currently available:
     // - Chrome
-    // - ChromeCanary
     // - Firefox
-    // - Opera (has to be installed with `npm install karma-opera-launcher`)
-    // - Safari (only Mac; has to be installed with `npm install karma-safari-launcher`)
+    // - Opera
+    // - Safari
     // - PhantomJS
-    // - IE (only Windows; has to be installed with `npm install karma-ie-launcher`)
-    browsers: [/*'Chrome', 'Firefox', 'Safari', */'PhantomJS'],
+    // - IE (only Windows)
+    browsers: [
+        // 'Chrome',
+        // 'Firefox',
+        // 'Safari',
+        'PhantomJS'
+    ],
 
 
     // Continuous Integration mode
