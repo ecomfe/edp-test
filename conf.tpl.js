@@ -54,5 +54,12 @@ module.exports = {
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: true
+    singleRun: true,
+
+
+    // Custom HTML templates
+    // context | debug | runner
+    templates: {
+        // context: 'context.html'
+    }
 };
