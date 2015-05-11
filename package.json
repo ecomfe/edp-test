@@ -1,7 +1,7 @@
 {
   "name": "edp-test",
   "description": "Package for edp test.",
-  "version": "1.0.9-beta.2",
+  "version": "1.0.9-beta.3",
   "contributors": [
     {
       "name": "chris",
@@ -10,7 +10,7 @@
   ],
   "dependencies": {
     "chokidar": "~0.8.2",
-    "edp-browser-launcher2": "^0.4.2",
+    "edp-browser-launcher2": "^0.4.4",
     "edp-config": "*",
     "edp-core": "*",
     "edp-project": "*",
