@@ -19,6 +19,7 @@
     "qransi": "0.0.2",
     "socket.io": "~0.9.13",
     "socket.io-client": "~0.9.16",
+    "source-map-closest-match": "^0.1.1",
     "useragent": "~2.0.8"
   },
   "main": "index.js",
