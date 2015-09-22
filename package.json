@@ -10,7 +10,7 @@
   ],
   "dependencies": {
     "chokidar": "~0.8.2",
-    "edp-browser-launcher2": "^0.4.4",
+    "edp-browser-launcher2": "^0.4.5",
     "edp-config": "*",
     "edp-core": "*",
     "edp-project": "*",
