@@ -16,11 +16,6 @@ module.exports = {
     ],
 
 
-    // list of files to exclude
-    exclude: [
-
-    ],
-
     // optionally, configure the reporter
     coverageReporter: {
         // text-summary | text | html | json | teamcity | cobertura | lcov
