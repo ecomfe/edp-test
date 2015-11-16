@@ -15,13 +15,13 @@ module.exports = {
         'test/**/*Spec.js'
     ],
 
-
     // optionally, configure the reporter
     coverageReporter: {
         // text-summary | text | html | json | teamcity | cobertura | lcov
         // lcovonly | none | teamcity
         type : 'text|html',
-        dir : 'test/coverage/'
+        dir : 'test/coverage/',
+        exclude: []
     },
 
     // web server port
