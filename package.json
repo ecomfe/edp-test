@@ -1,7 +1,7 @@
 {
   "name": "edp-test",
   "description": "Package for edp test.",
-  "version": "1.1.0-beta.1",
+  "version": "1.1.0-beta.2",
   "contributors": [
     {
       "name": "chris",
@@ -24,7 +24,6 @@
     "edp-project": "*",
     "edp-webserver": "*",
     "istanbul": "~0.2.4",
-    "jasmine-node1.3.1": "git+https://github.com/mhevery/jasmine-node.git",
     "jasmine-node": "^2.0.0",
     "qransi": "0.0.2",
     "socket.io": "~0.9.13",
