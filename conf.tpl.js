@@ -2,6 +2,8 @@
 // Generated on %DATE%
 module.exports = {
 
+    node: false,
+
     // base path, that will be used to resolve files and exclude
     basePath: '../',
 

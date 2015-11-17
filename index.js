@@ -72,8 +72,7 @@ exports.init = function (opts) {
  * @param {Object} opts 命令选项
  */
 exports.start = function (opts) {
-
-    if (!check()) {
+    if (!check() && !('node' in opts)) {
         require('./lib/init').run();
     }
 

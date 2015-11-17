@@ -25,8 +25,11 @@ cli.command = 'start';
  */
 cli.options = [
     'port:',
-    'singleRun:',
-    'watch:'
+    'singleRun',
+    'watch',
+    'node',
+    'debug',
+    'jasmine:'
 ];
 
 /**
