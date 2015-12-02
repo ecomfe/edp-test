@@ -17,7 +17,7 @@ require.config(/*requireConfig*/);
 
         var jasmineEnv = jasmine.getEnv();
         jasmineEnv.updateInterval = 1000;
-        var htmlReporter = jasmine.htmlReporter || new jasmine.HtmlReporter();
+        var htmlReporter = jasmine.htmlReporter || new jasmine.HtmlReporter({});
         jasmineEnv.addReporter(htmlReporter);
 
         // for jasmine2
