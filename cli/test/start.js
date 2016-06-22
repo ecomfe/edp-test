@@ -46,7 +46,12 @@ cli.description = '运行 edp-test 服务';
  * @param {Object} opts 命令选项
  */
 cli.main = function (args, opts) {
-    require('../../index').start(opts);
+    if (args.length) {
+        require('../../lib/benchmark').run(args);
+    }
+    else {
+        require('../../index').start(opts);
+    }
 };
 
 /**
