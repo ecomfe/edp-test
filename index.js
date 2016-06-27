@@ -50,7 +50,7 @@ exports.init = function (opts) {
     rl.prompt();
     rl.write('no');
     var isYes = false;
-    process.stdin.on('keypress', function(s, key) {
+    process.stdin.on('keypress', function (s, key) {
         if (~'up,down,tab'.indexOf(key.name)) {
             rl._deleteLineLeft();
             rl._deleteLineRight();
@@ -69,14 +69,15 @@ exports.init = function (opts) {
 /**
  * 运行测试服务
  *
+ * @param {Array} args 命令运行参数
  * @param {Object} opts 命令选项
  */
-exports.start = function (opts) {
+exports.start = function (args, opts) {
     if (!check() && !('node' in opts)) {
         require('./lib/init').run();
     }
 
-    require('./lib/start').run(opts);
+    require('./lib/start').run(args, opts);
 
 };
 

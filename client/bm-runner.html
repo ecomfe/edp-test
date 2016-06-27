@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>edp test runner - using Benchmark.js</title>
+<script src="socket.io/socket.io.js"></script>
+<style>
+    iframe {
+      height: 100%;
+      width: 100%;
+      border: 0;
+    }
+
+    html, body {
+      height: 100%;
+      padding: 0;
+      margin: 0;
+
+      font-family: sans-serif;
+    }
+
+    .offline {
+      background: #DDD;
+    }
+
+    .online {
+      background: #6C4;
+
+    }
+
+    .iddle {
+    }
+
+    .executing {
+      background: #F99;
+    }
+
+    #banner {
+      padding: 5px 10px;
+    }
+
+    h1 {
+      font-size: 1.8em;
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      padding: 5px 12px;
+    }
+
+    .btn-debug {
+      float: right;
+    }
+
+    .offline .btn-debug {
+      display: none;
+    }
+
+    .btn-debug {
+      -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+      -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+      box-shadow:inset 0px 1px 0px 0px #ffffff;
+      background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #f6f6f6) );
+      background:-moz-linear-gradient( center top, #ffffff 5%, #f6f6f6 100% );
+      filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6');
+      background-color:#ffffff;
+      -moz-border-radius:6px;
+      -webkit-border-radius:6px;
+      border-radius:6px;
+      border:1px solid #dcdcdc;
+      display:inline-block;
+      color:#666666;
+      font-family:arial;
+      font-size:15px;
+      font-weight:bold;
+      padding:6px 24px;
+      text-decoration:none;
+      text-shadow:1px 1px 0px #ffffff;
+    }
+
+    .btn-debug:hover {
+      background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f6f6f6), color-stop(1, #ffffff) );
+      background:-moz-linear-gradient( center top, #f6f6f6 5%, #ffffff 100% );
+      filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f6f6', endColorstr='#ffffff');
+      background-color:#f6f6f6;
+    }
+  </style>
+</head>
+<body>
+<div id="banner" class="online">
+    <a id="debug-link" href="bm-debug.html" target="_blank" class="btn-debug">DEBUG</a>
+    <h1 id="title">edp test - starting</h1>
+</div>
+<ul id="browsers"></ul>
+<iframe id="context" src="about:blank"></iframe>
+<script>
+(function (global) {
+    var id =  function (key) {
+        key = key.replace(/./g, function (m) {
+            return m.charCodeAt();
+        }).split('');
+         var p = 16777619, hash = 0x811C9DC5, l = key.length;
+         for(var i=0; i< l; i++) {
+              hash = (hash ^ key[i]) * p;
+         }
+        hash += hash << 13;
+        hash ^= hash >> 7;
+        hash += hash << 3;
+        hash ^= hash >> 17;
+        hash += hash << 5;
+        hash = hash & 0x7FFFFFFF; //取正.
+        hash = hash.toString(36)
+        hash.length < 6 && (hash += (l % 36).toString(36))
+        return  hash;
+    }(navigator.userAgent);
+
+    var pages  = [/*pages*/];
+    var index = 0;
+    var getPage = function () {
+      var page = pages[index];
+      return 'bm-context.html?name=' + (page || '');
+    };
+
+    var start = function () {
+        document.getElementById('banner').className = 'online';
+        document.getElementById('title').innerHTML = 'edp test - running ' + pages[index];
+        document.getElementById('debug-link').href = 'bm-debug.html?name=' + pages[index];
+
+        socket.emit('registerBrowser', {fullName: navigator.userAgent, id: id});
+    };
+
+    var socket = io.connect(location.host, {
+        'reconnection delay': 500,
+        'reconnection limit': 2000,
+        'sync disconnect on unload': true,
+        'max reconnection attempts': Infinity
+    });
+    start();
+
+    socket.on('execute', function () {
+        document.getElementById('context').src = getPage();
+    });
+
+    socket.on('start', function () {
+        // console.log('开始运行');
+        start();
+    });
+
+    socket.on('next', function () {
+        // console.log('开始运行');
+        index++;
+        if (pages[index]) {
+          start();
+          document.getElementById('context').src = getPage();
+        }
+        else {
+          socket.emit('done');
+        }
+    });
+
+    socket.on('disconnect', function () {
+        // console.log('断开连接');
+        document.getElementById('banner').className = 'offline';
+        document.getElementById('title').innerHTML = 'edp test - closed';
+    });
+
+    socket.on('reconnect', function () {
+        // console.log('重新连接');
+        start();
+    });
+
+    socket.on('idle', function () {
+        document.getElementById('title').innerHTML = 'edp test - idle';
+    });
+
+    socket.on('reload', function (path) {
+        // console.log('%s 已修改', path);
+        document.getElementById('context').src = getPage() + '&' + (+new Date).toString(36);
+    });
+
+    socket.on('update', function (browsers) {
+        for (var i = 0, l = browsers.length, html = []; i < l; i++) {
+          html.push('<li>' + browsers[i].name + '</li>');
+        }
+        document.getElementById('browsers').innerHTML = html.join('\n');
+    });
+
+    global.execute = function () {
+        throw new Error('未实现');
+    };
+
+    global.done = function () {
+        document.getElementById('context').src = 'about:blank';
+    };
+
+    global.start = function () {
+        this.execute(socket);
+    };
+})(window);
+</script>
+</body>
+</html>

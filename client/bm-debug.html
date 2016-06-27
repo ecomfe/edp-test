@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>edp test runner - using Benchmark.js</title>
+<!--%css%-->
+<!--%style%-->
+<!--%frameworks%-->
+</head>
+<body>
+<!--%html%-->
+<h3 id="browser"></h3>
+<ul id="cycle"></ul>
+<h3 id="result">Running...</h3>
+<script>
+(function () {
+var suite;
+/*cases*/
+document.getElementById('browser').innerHTML = String(platform);
+
+suite.on('cycle', function (e) {
+    var li = document.createElement('li');
+    li.innerHTML = String(e.target);
+    document.getElementById('cycle').appendChild(li);
+});
+
+suite.on('complete', function () {
+    document.getElementById('result').innerHTML = ''
+        + '<p>The winner is ' + this.filter('fastest').map('name') + '</p>';
+}).run({async: true});
+
+})();
+</script>
+</body>
+</html>

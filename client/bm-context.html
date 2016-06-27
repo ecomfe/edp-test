@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>edp test runner - using Benchmark.js</title>
+<!--%css%-->
+<!--%style%-->
+<!--%frameworks%-->
+</head>
+<body>
+<!--%html%-->
+<script>
+(function () {
+var suite;
+/*cases*/
+var runner = (parent || opener);
+runner.execute = function (socket) {
+    var length = suite.length;
+
+    socket.emit('start', length);
+
+    var count = 0;
+    suite.on('cycle', function (e) {
+        count++;
+        var summary =  ''
+            + 'Executed ' + parseInt((count * 100) / length)
+            + '% (' + count + ' / ' + length + ')\n\t';
+
+        socket.emit('cycle', summary + String(e.target));
+    });
+
+    suite.on('complete', function () {
+        socket.emit('finish', this.name + ' - The winner is ' + this.filter('fastest').map('name'));
+    }).run({async: true});
+};
+
+runner.start();
+
+})();
+</script>
+</body>
+</html>

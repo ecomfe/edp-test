@@ -34,6 +34,9 @@
     "source-map-closest-match": "^0.1.1",
     "useragent": "~2.0.8"
   },
+  "devDependencies": {
+    "fecs": "latest"
+  },
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -42,7 +45,9 @@
   "readme": "# edp-test\n\ntest command for edp.\n\n\n\n\n",
   "readmeFilename": "README.md",
   "scripts": {
-    "test": "make -C test"
+    "lint": "fecs cli scripts lib index.js",
+    "test": "npm run lint && make -C test",
+    "postinstall": "node scripts/install.js"
   },
   "bugs": {
     "url": "https://github.com/ecomfe/edp-test/issues"
