@@ -19,7 +19,7 @@ describe('配置文件解释', function () {
 
     it('用户配置文件', function () {
         var mod = require('../../lib/config');
-        var configFile = path.resolve(process.cwd(), 'fixture/config.js');
+        var configFile = path.resolve(process.cwd(), 'test/fixture/config.js');
         mod.config = configFile;
 
         expect(mod.config.files).toBeDefined();

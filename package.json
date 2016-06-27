@@ -45,8 +45,9 @@
   "readme": "# edp-test\n\ntest command for edp.\n\n\n\n\n",
   "readmeFilename": "README.md",
   "scripts": {
-    "lint": "fecs cli scripts lib index.js",
-    "test": "npm run lint && make -C test",
+    "lint": "fecs cli scripts lib index.js --rule --reporter baidu",
+    "specs": "EDP_LOG_SILENT=1 jasmine-node  --captureExceptions test/",
+    "test": "npm run lint && npm run specs",
     "postinstall": "node scripts/install.js"
   },
   "bugs": {

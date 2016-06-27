@@ -44,6 +44,7 @@ describe('工具函数', function () {
 
             // 可能会一直向上加 1 直至找到可用的端口
             expect(config.port).toBe(port + 1);
+            server.close();
             done();
         });
 
